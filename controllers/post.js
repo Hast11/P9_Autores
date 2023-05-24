@@ -6,7 +6,8 @@ exports.load = async (req, res, next, postId) => { //Exporta la funcion load, as
     try{ //Intenta para capturar el error
         const post = await models.Post.findByPk(postId, { //Crea constante post y busco en la DB por la clave primera el postId
             include: [ //Carga ansiosa
-                {model: models.Attachment, as: 'attachment'}//Si encuentra el objeto post, añademe la propiedad attachment, que sea objeto js que tenga los datos del attachment
+                {model: models.Attachment, as: 'attachment'},//Si encuentra el objeto post, añademe la propiedad attachment, que sea objeto js que tenga los datos del attachment
+                {model: models.User, as: 'author'}
             ]
         });
         if (post) { //Si encontramos el post
