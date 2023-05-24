@@ -76,14 +76,22 @@ exports.create = async (req, res, next) => { //Toma la peticion
     // const title = req.body.title;
     // const body = req.body.body
     // req.
+    let authorId;
+    if(req.session.loginUser){
+        authorId = req.session.loginUser.id;
+
+    }
+    //let author = req.session.loginUser?.id; Es lo mismo que lo de arriba
+
     let post; //Inicializo variable post
     try {
         post = models.Post.build({ //Generame una copia persistente de un objeto de una fila de la DB, post
             title,
-            body
+            body,
+            authorId
         });
 
-        post = await post.save({fields: ["title", "body"]}); //Guardo la copia en la base de datos
+        post = await post.save({fields: ["title", "body", "authorId"]}); //Guardo la copia en la base de datos
         // console.log('Post creado con éxito.');
 
         try {
