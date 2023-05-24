@@ -145,3 +145,16 @@ exports.destroy = async (req, res, next) => {
         next(error);
     }
 };
+
+/*
+Que ocurre cuando se le hace una peticion al servidor del tipo"/users/7
+    1. se localiza que usuario tiene el id 7:metodo.load()
+        a. Se busca en la DB el user con PK=7
+        b. se carga dicho valor en la propiedad:
+            i. req.load.user={objeto devuelto por la db}
+    2. se renderiza una vista qeu tenga como variable el usuario capturado en la DB .show(), .index(), .new()., ...
+        a. se renombra la variable a pasar a la vista a user:
+            i. {user} = req.load
+        b. se renderiza la vista con la variable
+            i. res.render("/users/show",{user})
+*/
