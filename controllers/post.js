@@ -6,7 +6,8 @@ exports.load = async (req, res, next, postId) => { //Exporta la funcion load, as
     try{ //Intenta para capturar el error
         const post = await models.Post.findByPk(postId, { //Crea constante post y busco en la DB por la clave primera el postId
             include: [ //Carga ansiosa
-                {model: models.Attachment, as: 'attachment'}//Si encuentra el objeto post, añademe la propiedad attachment, que sea objeto js que tenga los datos del attachment
+                {model: models.Attachment, as: 'attachment'},//Si encuentra el objeto post, añademe la propiedad attachment, que sea objeto js que tenga los datos del attachment
+                {model: models.User, as: 'author'}
             ]
         });
         if (post) { //Si encontramos el post
@@ -44,7 +45,8 @@ exports.index = async (req, res, next) => {
     try {
         const findOptions = { //Aqui es como en el primer metoo pero en vez de poner el include en el find all
             include: [ //Lo deja creado de antes
-                {model: models.Attachment, as: 'attachment'}
+                {model: models.Attachment, as: 'attachment'},
+                {model: models.User, as: 'author'}
             ]
         };
 
@@ -76,14 +78,22 @@ exports.create = async (req, res, next) => { //Toma la peticion
     // const title = req.body.title;
     // const body = req.body.body
     // req.
+    let authorId;
+    if(req.session.loginUser){
+        authorId = req.session.loginUser.id;
+
+    }
+    //let author = req.session.loginUser?.id; Es lo mismo que lo de arriba
+
     let post; //Inicializo variable post
     try {
         post = models.Post.build({ //Generame una copia persistente de un objeto de una fila de la DB, post
             title,
-            body
+            body,
+            authorId
         });
 
-        post = await post.save({fields: ["title", "body"]}); //Guardo la copia en la base de datos
+        post = await post.save({fields: ["title", "body", "authorId"]}); //Guardo la copia en la base de datos
         // console.log('Post creado con éxito.');
 
         try {

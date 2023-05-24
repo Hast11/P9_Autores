@@ -18,4 +18,8 @@ const User = require('./user')(sequelize, Sequelize.DataTypes);
 Attachment.hasOne(Post, {as: 'post', foreignKey: 'attachmentId'});
 Post.belongsTo(Attachment, {as: 'attachment', foreignKey: 'attachmentId'});
 
+//Realcion 1-N usuarios y post
+User.hasMany(Post, {as:'posts', foreignKey:'authorId'});
+Post.belongsTo(User, {as: 'author', foreignKey: 'authorId'}); //quien se lleva la N es el belongs
+
 module.exports = sequelize;
