@@ -45,7 +45,8 @@ exports.index = async (req, res, next) => {
     try {
         const findOptions = { //Aqui es como en el primer metoo pero en vez de poner el include en el find all
             include: [ //Lo deja creado de antes
-                {model: models.Attachment, as: 'attachment'}
+                {model: models.Attachment, as: 'attachment'},
+                {model: models.User, as: 'author'}
             ]
         };
 
