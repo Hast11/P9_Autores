@@ -10,13 +10,13 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
     await queryInterface.addColumn(
-      'Posts', //tABLA QUE VOY A MODIFICAR
+      'Posts', //TABLA QUE VOY A MODIFICAR
       'authorId', //COLUMNA QUE AÑADO
       {
           type: Sequelize.INTEGER,
-          references: {
-              model: "Users",
-              key: "id"
+          references: { //A que hace referencia
+              model: "Users", // A la tabla de usuario
+              key: "id" //A traves de su id
           },
           onUpdate: 'CASCADE',
           onDelete: 'SET NULL'
