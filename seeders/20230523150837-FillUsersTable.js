@@ -11,7 +11,7 @@ module.exports = {
             {
                 username: 'admin',
                 password: crypt.encryptPassword('1234', 'aaaa'),
-                salt: 'aaaa',
+                salt: 'aaaa', //prueba 2
                 email: "admin@core.example",
                 isAdmin: true,
                 createdAt: new Date(), updatedAt: new Date()
