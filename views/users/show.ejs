@@ -1,0 +1,18 @@
+<section>
+    <h2>User:</h2>
+    <ul>
+        <li>
+            <span>Usuario:<b><%= user.username %></b></span>
+        </li>
+        <li>
+            <span>Email:<b><%= user.email %></b></span>
+        </li>
+        <li>
+            <span>Administrator:<b><%= user.isAdmin ? "Yes" : "No" %></b></span>
+        </li>
+    </ul>
+    <a href="/users/<%= user.id %>/edit" class="button-2">Editar</a>
+    <a href="/users/<%= user.id %>?_method=DELETE"
+        onClick="return confirm('Delete user: <%= user.username %>');"
+        class="button-2">Borrar</a>
+</section>

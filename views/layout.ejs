@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Blog</title>
+    </head>
+    <body>
+        <header class="main" id="mainHeader">
+            <h1> Welcome to My Blog</h1>         
+            <nav>
+                <div>
+                <% if (!locals.loginUser) { %>
+                    <a href="/login">Login</a>
+                <% } %>
+                <a href="/">Inicio</a>
+                <a href="/author">Autor</a>
+                <a href="/posts">Posts</a>
+                <a href="/users">Usuarios</a>
+                <a href="/users/new">Crear usuario</a>
+                </div> 
+                <% if (locals.loginUser) { %>
+                    <a href="/users/<%= loginUser.id %>"><%= loginUser.username %></a>
+                    <a href="/login?_method=DELETE" class="logoutLink">Logout</a>
+                <% }%>
+                <div>
+                </div>
+            </nav>
+        </header>
+    </body>
+    <div>
+        <%- body %>
+    </div>
+    <footer>
+        <div> Aqui está el footer de la página</div>
+    </footer>
+</html>
