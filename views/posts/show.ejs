@@ -6,7 +6,9 @@
         <ul>
             <li>Title: <b><%= post.title %></b></li>
             <li>Body: <b><%= post.body %></b></li>
-            <li>Post de:<b><%= post.author?.username ?? "Vete tu a saber de quien" %></b></li>
         </ul>
+        <div>
+            <small id="author">Post de:<b><%= post.author?.username ?? "Vete tu a saber quien" %></b> </small>
+        </div>
     </article>
 </section>
